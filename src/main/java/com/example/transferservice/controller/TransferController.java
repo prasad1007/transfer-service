@@ -1,12 +1,6 @@
 package com.example.transferservice.controller;
 
-import com.example.transferservice.exception.AccountNotExistException;
-import com.example.transferservice.exception.NoSufficientBalanceException;
-import com.example.transferservice.model.rest.TransferRequest;
-import com.example.transferservice.model.rest.TransferResponse;
-
-import com.example.transferservice.service.AccountsService;
-import static com.example.transferservice.constant.UriConstants.TRANSACTION_API;
+import static com.example.transferservice.constant.UriConstants.TRANSFER_SERVICE_API;
 import static com.example.transferservice.constant.UriConstants.TRANSFER_URI;
 
 import java.util.Objects;
@@ -22,15 +16,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping(TRANSACTION_API)
-public class TransactionController {
+import com.example.transferservice.exception.AccountNotExistException;
+import com.example.transferservice.exception.NoSufficientBalanceException;
+import com.example.transferservice.model.rest.TransferRequest;
+import com.example.transferservice.model.rest.TransferResponse;
+import com.example.transferservice.service.AccountsService;
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(TransactionController.class);
+@RestController
+@RequestMapping(TRANSFER_SERVICE_API)
+public class TransferController {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(TransferController.class);
 
   @Autowired private final AccountsService accountService;
 
-  private TransactionController(final AccountsService accountService) {
+  private TransferController(final AccountsService accountService) {
     this.accountService = Objects.requireNonNull(accountService);
   }
 

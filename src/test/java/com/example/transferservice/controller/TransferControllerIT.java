@@ -1,6 +1,6 @@
 package com.example.transferservice.controller;
 
-import static com.example.transferservice.constant.UriConstants.TRANSACTION_API;
+import static com.example.transferservice.constant.UriConstants.TRANSFER_SERVICE_API;
 import static com.example.transferservice.constant.UriConstants.TRANSFER_URI;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -24,7 +24,7 @@ import com.example.transferservice.model.rest.TransferResponse;
 
 @SpringBootTest(classes = TransferServiceApplication.class, webEnvironment = RANDOM_PORT)
 @ActiveProfiles("test")
-class TransactionControllerIT {
+class TransferControllerIT {
 
   private static final long SOURCE_ACCOUNT_NUMBER = 34000001L;
   private static final long DESTINATION_ACCOUNT_NUMBER = 34000002L;
@@ -39,7 +39,9 @@ class TransactionControllerIT {
         new TransferRequest(SOURCE_ACCOUNT_NUMBER, DESTINATION_ACCOUNT_NUMBER, new BigDecimal(100));
     final ResponseEntity<TransferResponse> responseEntity =
         restTemplate.postForEntity(
-            createURLWithPort(TRANSACTION_API + TRANSFER_URI), transferRequest, TransferResponse.class);
+            createURLWithPort(TRANSFER_SERVICE_API + TRANSFER_URI),
+            transferRequest,
+            TransferResponse.class);
     assertThat(responseEntity.getStatusCode(), is(OK));
   }
 
@@ -49,7 +51,9 @@ class TransactionControllerIT {
         new TransferRequest(34000003L, DESTINATION_ACCOUNT_NUMBER, new BigDecimal(100));
     final ResponseEntity<TransferResponse> responseEntity =
         restTemplate.postForEntity(
-            createURLWithPort(TRANSACTION_API + TRANSFER_URI), transferRequest, TransferResponse.class);
+            createURLWithPort(TRANSFER_SERVICE_API + TRANSFER_URI),
+            transferRequest,
+            TransferResponse.class);
     assertThat(responseEntity.getStatusCode(), is(NOT_FOUND));
   }
 
@@ -60,7 +64,9 @@ class TransactionControllerIT {
         new TransferRequest(SOURCE_ACCOUNT_NUMBER, DESTINATION_ACCOUNT_NUMBER, new BigDecimal(500));
     final ResponseEntity<TransferResponse> responseEntity =
         restTemplate.postForEntity(
-            createURLWithPort(TRANSACTION_API + TRANSFER_URI), transferRequest, TransferResponse.class);
+            createURLWithPort(TRANSFER_SERVICE_API + TRANSFER_URI),
+            transferRequest,
+            TransferResponse.class);
     assertThat(responseEntity.getStatusCode(), is(BAD_REQUEST));
   }
 

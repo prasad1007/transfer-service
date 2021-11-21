@@ -37,11 +37,11 @@ Initial data (src\main\resources\data.sql) will be loaded in the H2 database whe
 > (34000002, 100);
 ## Feature
 This application is for demo only. It provides APIs for following single feature
-- Create Transaction
+- Create transfer request between accounts
 ### Basic API Information
 | Method | Path | Usage |
 | --- | --- | --- |
-| POST | /v1/transaction/transfer | transfer amount between accounts |
+| POST | /v1/transferservice/transfer | transfer amount between accounts |
 ### H2 Database
 H2 database is available at URL - http://localhost:8080/h2/
 ### Library used
