@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.transferservice.entity.Account;
 
-@Transactional(readOnly = true)
 public interface AccountsRepository extends JpaRepository<Account, Long> {
 
+  @Transactional(readOnly = true)
   Optional<Account> findByAccountNumber(final Long accountNumber);
 
   @Lock(LockModeType.PESSIMISTIC_WRITE)
